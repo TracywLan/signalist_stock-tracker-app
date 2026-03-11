@@ -1,4 +1,5 @@
 'use client'
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -16,7 +17,7 @@ import NavItems from "./NavItems";
 const UserDropdown = () => {
     const router = useRouter();
 
-    const handleSignout = async() => {
+    const handleSignout = async () => {
         router.push("/sign-in");
     };
 
@@ -25,48 +26,54 @@ const UserDropdown = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="flex items-center gap3 text-gray-4 hover:text-yellow-500">
+                <Button variant="ghost" className="flex items-center gap-3 text-gray-400 hover:text-yellow-500">
                     <Avatar className="h-8 w-8">
-                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarImage src="https://github.com/shadcn.png" alt="Profile picture" />
                         <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
-                            {user.name[0]}
+                            {user.name.charAt(0).toUpperCase()}
                         </AvatarFallback>
                     </Avatar>
-                    <div className="hidden md-flex flex-col items-start">
+                    <div className="hidden md:flex flex-col items-start">
                         <span className="text-base font-medium text-gray-400">
                             {user.name}
                         </span>
                     </div>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="text-gray-400">
+            
+            <DropdownMenuContent className="w-auto text-gray-400">
                 <DropdownMenuLabel>
                     <div className="flex relative items-center gap-3 py-2">
-                        <Avatar className="h-10 w-10">
-                            <AvatarImage src="https://github.com/shadcn.png" />
+                        <Avatar className="h-10 w-10 shrink-0">
+                            <AvatarImage src="https://github.com/shadcn.png" alt="Profile picture" />
                             <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
-                                {user.name[0]}
+                                {user.name.charAt(0).toUpperCase()}
                             </AvatarFallback>
                         </Avatar>
-                        <div className="flex flex-col">
-                            <span className="text-base font-medium text-gray-400">
+                        
+                        <div className="flex flex-col min-w-0">
+                            <span className="text-base font-medium text-gray-400 truncate">
                                 {user.name}
                             </span>
-                            <span className="text-sm text-gray-500">
+                            <span className="text-sm text-gray-500 truncate">
                                 {user.email}
                             </span>
                         </div>
                     </div>
                 </DropdownMenuLabel>
+                
                 <DropdownMenuSeparator className="bg-gray-600" />
+                
                 <DropdownMenuItem onClick={handleSignout} className="text-gray-100 text-md font-medium focus:bg-transparent focus:text-yellow-500 transition-colors cursor-pointer">
                     <LogOut className="h-4 w-4 mr-2 hidden sm:block" />
                     Logout
                 </DropdownMenuItem>
+                
                 <DropdownMenuSeparator className="hidden sm:block bg-gray-600" />
-                <nav className="sm:hidden">
+                
+                <div className="sm:hidden">
                     <NavItems />
-                </nav>
+                </div>
             </DropdownMenuContent>
         </DropdownMenu>
     )
